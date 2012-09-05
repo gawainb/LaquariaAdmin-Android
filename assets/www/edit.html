@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+    <title>Laquaria.com</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+</head>
+<body>
+
+<page id="addAFish" data-role="page" data-add-back-btn="true" data-theme="b">
+    <header data-position="fixed" data-role="header" data-theme="b">
+        <h1>Laquaria.com</h1>
+    </header><!-- /header -->
+	<article data-role="content">
+        <div id='errors'><ul></ul></div>
+		<form method="post" id="addNewFishForm">
+            <input type="hidden" id="key" value="" />
+            <input type="hidden" id="revkey" value="" />
+            <span class="small">* Fields are required</span>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>Add a Fish</legend>
+					<div data-role="fieldcontain">
+						<label for="commonName">Common Name</label>
+						<input type="text" name="commonName" id="commonName" value="" placeholder="Oscar" class="required" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="scientificName">Scientific Name</label>
+						<input type="text" name="scientificName" id="scientificName" value="" placeholder="Astronotus Ocellatus" class="required" />
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="photo">Photo</label>
+						<input type="text" name="photo" id="photo" value="" placeholder="Oscar" />
+						<a href="#upload-fish-image" data-role="button" data-rel="dialog" data-transition="flip">Choose Image</a>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="family">Family</label>
+						<input type="text" name="family" id="family" value="" placeholder="Cichlidae" class="required" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="speciesType">Species Type</label>
+						<input type="text" name="speciesType" id="speciesType" value="" placeholder="South American Cichlids" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="maxSize">Maximum Size</label>
+						<input type="text" name="maxSize" id="maxSize" value="" placeholder="14 inches" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="lifeSpan">Life Span</label>
+						<input type="text" name="lifeSpan" id="lifeSpan" value="" placeholder="13 Years" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="naturalHabitat">Natural Habitat</label>
+						<input type="text" name="naturalHabitat" id="naturalHabitat" value="" placeholder="Amazon River Basin" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="minTank">Minimum Tank Size</label>
+						<input type="text" name="minTank" id="minTank" value="" placeholder="55 gallons" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="tankRegion">Tank Region</label>
+						<input type="text" name="tankRegion" id="tankRegion" value="" placeholder="All Over" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="possibleTankMates">Possible Tank Mates</label>
+						<input type="text" name="possibleTankMates" id="possibleTankMates" value="" placeholder="Firemouth Meeki, Catfish, Plecos" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="desc">Description</label>
+						<textarea cols="40" rows="8" name="desc" id="desc"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Temperature Range</legend>
+							<div data-role="fieldcontain">
+								<label for="tempRangeLow">Low End &deg;F</label>
+								<input type="range" name="tempRangeLow" id="tempRangeLow" value="70.0" min="60.0" max="90.0" />
+							</div>
+							<div data-role="fieldcontain">
+								<label for="tempRangeHigh">High End &deg;F</label>
+								<input type="range" name="tempRangeHigh" id="tempRangeHigh" value="75.0" min="60.0" max="90.0" />
+							</div>
+						</fieldset>
+					</div>
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>PH Range</legend>
+							<div data-role="fieldcontain">
+								<label for="phRangeLow">Low End</label>
+								<input type="range" name="phRangeLow" id="phRangeLow" value="6.0" min="5.0" max="9.0" step="0.1" />
+							</div>
+							<div data-role="fieldcontain">
+								<label for="phRangeHigh">High End</label>
+								<input type="range" name="phRangeHigh" id="phRangeHigh" value="7.0" min="5.0" max="9.0" step="0.1" />
+							</div>
+						</fieldset>
+					</div>
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Hardness Range</legend>
+							<div data-role="fieldcontain">
+								<label for="hardRangeLow">Low End</label>
+								<input type="range" name="hardRangeLow" id="hardRangeLow" value="5.0" min="0.0" max="40.0" />
+							</div>
+							<div data-role="fieldcontain">
+								<label for="hardRangeHigh">High End</label>
+								<input type="range" name="hardRangeHigh" id="hardRangeHigh" value="20.0" min="0.0" max="40.0" />
+							</div>
+						</fieldset>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="breedingInfo">Breeding Info</label>
+						<textarea cols="40" rows="8" name="breedingInfo" id="breedingInfo"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="sexingInfo">Sexing Info</label>
+						<textarea cols="40" rows="8" name="sexingInfo" id="sexingInfo"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="diet">Diet</label>
+						<textarea cols="40" rows="8" name="diet" id="diet"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="temperment">Temperment</label>
+						<textarea cols="40" rows="8" name="temperment" id="temperment"></textarea>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="commonDiseases">Common Diseases</label>
+						<textarea cols="40" rows="8" name="commonDiseases" id="commonDiseases"></textarea>
+					</div>
+				</fieldset>
+				<button type="submit" id='submit' name='submit' data-theme='b'>Add New Fish</button>
+			</div>
+		</form>
+
+	</article><!-- /content -->
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h1>&copy; 2012 Laquaria.com</h1>
+    </footer><!-- /footer -->
+</page><!-- /page -->
+
+</body>
+</html>
