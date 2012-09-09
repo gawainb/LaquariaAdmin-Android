@@ -1,3 +1,27 @@
+// PhoneGap Index.js
+var app = {
+initialize: function() {
+    this.bind();
+},
+bind: function() {
+    document.addEventListener('deviceready', this.deviceready, false);
+},
+deviceready: function() {
+    // note that this is an event handler so the scope is that of the event
+    // so we need to call app.report(), and not this.report()
+    app.report('deviceready');
+},
+report: function(id) {
+    console.log("report:" + id);
+    // hide the .pending <p> and show the .complete <p>
+    document.querySelector('#' + id + ' .pending').className += ' hide';
+    var completeElem = document.querySelector('#' + id + ' .complete');
+    completeElem.className = completeElem.className.split('hide').join('');
+}
+};
+
+
+
 // back to homepage function if click the fixed header title
 $('header h1').on('click', function(event){
 	$.mobile.changePage('#home', {
@@ -304,3 +328,208 @@ $('#fishProfile').live('pageshow',function(){
 
 
 
+//PhoneGap Camera Functions
+$('#phoneGap-Camera').live('pageshow', function(){
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+
+    // Wait for Cordova to connect with the device
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // Cordova is ready to be used!
+    //
+    function onDeviceReady() {
+       pictureSource=navigator.camera.PictureSourceType;
+       destinationType=navigator.camera.DestinationType;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+       // Uncomment to view the base64 encoded image data
+       console.log(imageData);
+       
+       // Get image handle
+       //
+       var smallImage = document.getElementById('smallImage');
+       
+       // Unhide image elements
+       //
+       smallImage.style.display = 'block';
+       
+       // Show the captured photo
+       // The inline CSS rules are used to resize the image
+       //
+       smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+       // Uncomment to view the image file URI
+       console.log(imageURI);
+       
+       // Get image handle
+       //
+       var largeImage = document.getElementById('largeImage');
+       
+       // Unhide image elements
+       //
+       largeImage.style.display = 'block';
+       
+       // Show the captured photo
+       // The inline CSS rules are used to resize the image
+       //
+       largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    $('#pgCamCapturePhoto').bind('click',function(){
+       // Take picture using device camera and retrieve image as base64-encoded string
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: navigator.camera.DestinationType.DATA_URL });
+    });
+
+    // A button will call this function
+    //
+    $('#pgCamCapturePhotoEdit').bind('click',function(){
+       // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true, destinationType: navigator.camera.DestinationType.DATA_URL });
+    });
+
+    // A button will call this function
+    //
+    $('#pgCamGetPhotoLib').bind('click',function(){
+       var source = navigator.camera.pictureSource.PHOTOLIBRARY;
+       // Retrieve image file location from specified source
+       navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+                                   destinationType: navigator.camera.DestinationType.FILE_URI,
+                                   sourceType: source });
+    });
+
+                           
+    // A button will call this function
+    //
+    $('#pgCamGetPhotoAlbum').bind('click',function(){
+        var source = pictureSource.SAVEDPHOTOALBUM;
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+                                   destinationType: navigator.camera.DestinationType.FILE_URI,
+                                   sourceType: source });
+    });
+
+                           
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+       alert('Failed because: ' + message);
+    }
+    alert('camera page good!')
+});
+
+
+
+// PhoneGap connection
+$('#phoneGap-Connection').live('pageshow', function() {
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is loaded and it is now safe to make calls Cordova methods
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
+
+    function checkConnection() {
+        var networkState = navigator.network.connection.type;
+        
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        var alertMessage = 'Connection type: ' + states[networkState];
+
+                               function alertDismissed() {
+                               //do something
+                               };
+                               
+            navigator.notification.alert(
+                alertMessage,  // message
+                alertDismissed,         // callback
+                'Connection Status',            // title
+                'Awesomesauce!!!'                  // buttonName
+            );
+
+    }
+
+});
+
+
+
+
+
+
+
+// phonegap storage testing
+$('#phoneGap-Storage').live('pageshow', function() {
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    // Populate the database
+    //
+    function populateDB(tx) {
+        tx.executeSql('DROP TABLE IF EXISTS DEMO');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
+    
+    // Query the database
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+    }
+    
+    // Query the success callback
+    //
+    function querySuccess(tx, results) {
+        var len = results.rows.length;
+        console.log("DEMO table: " + len + " rows found.");
+        $('#phoneGap-StorageListView').empty();
+        for (var i=0; i<len; i++){
+            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+            $('<li>'+results.rows.item(i).data+'</li>').appendTo($('#phoneGap-StorageListView')).trigger('create');
+        }
+        $('#phoneGap-StorageListView').listview('refresh');
+
+        console.log("Returned rows = " + results.rows.length);
+    }
+    
+    // Transaction error callback
+    //
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
+    }
+    
+    // Transaction success callback
+    //
+    function successCB() {
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(queryDB, errorCB);
+    }
+    
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+    }
+});

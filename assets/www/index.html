@@ -25,6 +25,17 @@
 	</header><!-- /header -->
 	<article data-role="content" data-theme="b">
 		<p><img src="images/laquaria-logo.png" width="100%" /></p>
+        <div data-role="collapsible" data-theme='e'>
+            <h3>AVF Week2 Assignment</h3>
+            <p>Here are my Week2 Assignment links to working PhoneGap features. </p>
+            
+                
+            <a href="phoneGap-Camera.html" data-role="button">Use of Camera</a>
+            <a href="phoneGap-Connection.html" data-role="button">Use of Connection</a>
+            <a href="phoneGap-Storage.html" data-role="button">Use of Storage</a>
+
+        </div>
+        <br />
 		<ul data-role="listview" data-theme="e">
 			<li><a href="edit.html">Add a Fish</a></li>
 			<li><a href="#browseFishies">Browse Fishies</a></li>
@@ -50,64 +61,11 @@
 </page><!-- /page -->
 
 
-<page id="fishProfile" data-role="page" data-add-back-btn="true" data-theme="b">
-    <header data-position="fixed" data-role="header" data-theme="b">
-        <h1>Laquaria.com</h1>
-    </header><!-- /header -->
-    <article data-role="content">
-        <ul data-role="listview" id="browseFishiesLV" data-theme="c"></ul>
-    </article><!-- /content -->
-    <footer data-role="footer" data-position="fixed" data-theme="b">
-        <h1>&copy; 2012 Laquaria.com</h1>
-    </footer><!-- /footer -->
-</page><!-- /page -->
-
-
-<page id="upload-fish-image" data-role="page" data-add-back-btn="true" data-theme="b">
-	<header data-position="fixed" data-role="header" data-theme="b">
-		<h1>Choose/Upload a Photo</h1>
-	</header>
-	<article data-role="content">
-		<div data-role="collapsible-set">
-
-			<div data-role="collapsible" data-collapsed="false">
-				<h3>Upload New Photo</h3>
-				<p>I'm the collapsible set content for section 1.</p>
-			</div>
-			
-			<div data-role="collapsible">
-				<h3>Choose Existing Photo</h3>
-				<div class="ui-grid-b">
-					<div class="ui-block-a">Block A</div>
-					<div class="ui-block-b">Block B</div>
-					<div class="ui-block-c">Block C</div>
-				</div><!-- /grid-b -->
-				<div class="ui-grid-b">
-					<div class="ui-block-a">Block A</div>
-					<div class="ui-block-b">Block B</div>
-					<div class="ui-block-c">Block C</div>
-				</div><!-- /grid-b -->
-				<div class="ui-grid-b">
-					<div class="ui-block-a">Block A</div>
-					<div class="ui-block-b">Block B</div>
-					<div class="ui-block-c">Block C</div>
-				</div><!-- /grid-b -->
-
-			</div>
-			
-			<div data-role="collapsible">
-				<h3>Cancel</h3>
-				<a href="#" data-role="button" data-rel="back" data-theme="a">Cancel</a>
-			</div>
-		</div>
-	</article><!-- /content -->
-</page><!-- /page -->
-
-
 <script type="text/javascript" src="js/libs/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/libs/jquery.mobile-1.1.1.min.js"></script>
 <script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/libs/jquery.couch.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>
