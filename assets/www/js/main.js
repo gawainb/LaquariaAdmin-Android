@@ -388,23 +388,25 @@ $('#phoneGap-Camera').live('pageshow', function(){
     //
     $('#pgCamCapturePhoto').bind('click',function(){
        // Take picture using device camera and retrieve image as base64-encoded string
-       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: navigator.camera.DestinationType.DATA_URL });
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+                                   destinationType: destinationType.DATA_URL });
     });
 
     // A button will call this function
     //
     $('#pgCamCapturePhotoEdit').bind('click',function(){
        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true, destinationType: navigator.camera.DestinationType.DATA_URL });
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+                                   destinationType: destinationType.DATA_URL });
     });
 
     // A button will call this function
     //
     $('#pgCamGetPhotoLib').bind('click',function(){
-       var source = navigator.camera.pictureSource.PHOTOLIBRARY;
+       var source = pictureSource.PHOTOLIBRARY;
        // Retrieve image file location from specified source
        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
-                                   destinationType: navigator.camera.DestinationType.FILE_URI,
+                                   destinationType: destinationType.FILE_URI,
                                    sourceType: source });
     });
 
@@ -415,7 +417,7 @@ $('#phoneGap-Camera').live('pageshow', function(){
         var source = pictureSource.SAVEDPHOTOALBUM;
         // Retrieve image file location from specified source
         navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-                                   destinationType: navigator.camera.DestinationType.FILE_URI,
+                                   destinationType: destinationType.FILE_URI,
                                    sourceType: source });
     });
 
@@ -426,6 +428,39 @@ $('#phoneGap-Camera').live('pageshow', function(){
        alert('Failed because: ' + message);
     }
     alert('camera page good!')
+});
+
+
+
+
+$('#phoneGap-Notifications').live('pageshow', function() {
+// PhoneGap Notifications
+// Wait for Cordova to load
+//
+document.addEventListener("deviceready", onDeviceReady, false);
+
+// Cordova is ready
+//
+function onDeviceReady() {
+    // Empty
+}
+
+// alert dialog dismissed
+function alertDismissed() {
+    // do something
+}
+
+// Show a custom alert
+//
+function showAlert() {
+    navigator.notification.alert(
+                                 'You are the winner!',  // message
+                                 alertDismissed,         // callback
+                                 'Game Over',            // title
+                                 'Done'                  // buttonName
+                                 );
+}
+
 });
 
 
@@ -533,3 +568,57 @@ $('#phoneGap-Storage').live('pageshow', function() {
         db.transaction(populateDB, errorCB, successCB);
     }
 });
+
+
+
+$('#twitter-search-api').live('pageshow', function() {
+                              console.log('Twitter Page OK!!');
+                              $.ajax({
+                                     url: 'http://search.twitter.com/search.json?q=aquarium',
+                                     type: 'GET',
+                                     dataType: 'jsonp',
+                                     success: function(data, textStatus, xhr) {
+                                     $('#twitterSearchLV').empty();
+                                     console.log(data);
+                                     console.log(xhr);
+                                     console.log(textStatus);
+                                     // append tweets into page
+                                     $(data.results).each(function(i,v){
+                                                          $('<li>' + 
+                                                            '<img src="' + this.profile_image_url + '" />' + 
+                                                            '<h1>' + this.from_user + '</h1>' + 
+                                                            '<p style="white-space: normal;">' + this.text + '</p>' + 
+                                                            '</li>').appendTo($('#twitterSearchLV'));
+                                                          });
+                                     $('#twitterSearchLV').listview('refresh');
+                                     }
+                                     });
+                              });
+
+
+
+
+$('#colourlovers').live('pageshow', function() {
+                        console.log('colour lovers Page OK!!');
+                        $.ajax({
+                               url: 'http://www.colourlovers.com/api/colors/top?jsonCallback=?',
+                               type: 'GET',
+                               dataType: 'jsonp',
+                               success: function(data, textStatus, xhr) {
+                               console.log('ajax call successful');
+                               $('#colourloversLV').empty();
+                               console.log(data);
+                               console.log(xhr);
+                               console.log(textStatus);
+                               // append tweets into page
+                               $(data).each(function(i,palette){
+                                            $('<li>' +
+                                              '<img src="' + palette.imageUrl + '" />' +
+                                              '<h1>' + palette.title + '</h1>' +
+                                              '</li>').appendTo($('#colourloversLV'));
+                                            });
+                               $('#colourloversLV').listview('refresh');
+                               }
+                               });
+                        });
+
