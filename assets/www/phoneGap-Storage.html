@@ -1,24 +1,104 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Capture Photo</title>
-    </head>
-    <body>
-        
-        <page id="phoneGap-Storage" data-role="page" data-add-back-btn="true" data-theme="b">
-            <header data-position="fixed" data-role="header" data-theme="b">
-                <h1>Laquaria.com</h1>
-            </header><!-- /header -->
-            <article data-role="content">
-                <p>This demo is for phoneGap storage. The program is dropping a table if it exists, creating it if it doesn't exist, inserting information, then console logging and displaying results from a sql statement. the display is the listview as follows: '</p>
-                <ul data-role="listview" id="phoneGap-StorageListView"></ul>
-            </article><!-- /content -->
-            <footer data-role="footer" data-position="fixed" data-theme="b">
-                <h1>&copy; 2012 Laquaria.com</h1>
-            </footer><!-- /footer -->
-        </page><!-- /page -->
-        
+<head>
+    <meta charset="utf-8" />
+    <title>FSO AVF - 1209 Final</title>
 
+    <meta name="description" content="FSO AVF - 1209 Final" />
+    <meta name="keywords" content="FSO AVF - 1209 Final" />
+
+    <meta name="author" content="Michael Youngblood" />
+
+    <meta name="robots" content="index, follow all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />
+</head>
+<body>
+    <header>
+        <h1>FSO AVF - 1209 Final</h1>
+    </header>
+
+    <article>
+        <section>
+            <h3>PhoneGap Storage</h3>
+            <p>This demo is for phoneGap storage. The program is dropping a table if it exists, creating it if it doesn't exist, inserting information, then console logging and displaying results from a sql statement. the display is the listview as follows: '</p>
+            <ul id="phoneGap-StorageListView"></ul>
+
+
+        </section>
+    </article>
+
+<script type="text/javascript">
+    !window.jQuery && document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><\/script>');
+    !window.jQuery && document.write('<script type="text/javascript" src="js/libs/jquery-1.8.2.min.js"><\/script>');
+</script>
+<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+$('document').ready(function() {
+console.log('storage page ready');
+// phonegap storage testing
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
     
-    </body>
+    // Populate the database
+    //
+    function populateDB(tx) {
+        tx.executeSql('DROP TABLE IF EXISTS DEMO');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
+    
+    // Query the database
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+    }
+    
+    // Query the success callback
+    //
+    function querySuccess(tx, results) {
+        var len = results.rows.length;
+        console.log("DEMO table: " + len + " rows found.");
+        $('#phoneGap-StorageListView').empty();
+        for (var i=0; i<len; i++){
+            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+            $('<li>'+results.rows.item(i).data+'</li>').appendTo($('#phoneGap-StorageListView')).trigger('create');
+        }
+
+        console.log("Returned rows = " + results.rows.length);
+    }
+    
+    // Transaction error callback
+    //
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
+    }
+    
+    // Transaction success callback
+    //
+    function successCB() {
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(queryDB, errorCB);
+    }
+    
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+    }
+});
+</script>
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</body>
 </html>

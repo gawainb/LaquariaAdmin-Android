@@ -1,24 +1,89 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Capture Photo</title>
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8" />
+    <title>FSO AVF - 1209 Final</title>
+
+    <meta name="description" content="FSO AVF - 1209 Final" />
+    <meta name="keywords" content="FSO AVF - 1209 Final" />
+
+    <meta name="author" content="Michael Youngblood" />
+
+    <meta name="robots" content="index, follow all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />
+</head>
+<body>
+    <header>
+        <h1>FSO AVF - 1209 Final</h1>
+    </header>
+
+    <article>
+        <section>
+            <h3>PhoneGap Connection</h3>
+            <p>Did you see that alert?? Awesome!!</p>
+        </section>
+    </article>
+
+<script type="text/javascript">
+    !window.jQuery && document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><\/script>');
+    !window.jQuery && document.write('<script type="text/javascript" src="js/libs/jquery-1.8.2.min.js"><\/script>');
+</script>
+<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+
+// PhoneGap connection
+$('document').ready(function() {
+    console.log()
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is loaded and it is now safe to make calls Cordova methods
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
+
+    function checkConnection() {
+        var networkState = navigator.network.connection.type;
         
-        <page id="phoneGap-Connection" data-role="page" data-add-back-btn="true" data-theme="b">
-            <header data-position="fixed" data-role="header" data-theme="b">
-                <h1>Laquaria.com</h1>
-            </header><!-- /header -->
-            <article data-role="content">
-                <p>Did you see that alert?? Awesome!!</p>
-                <p>This demo uses both notification and connection features of phonegap.</p>                
-            </article><!-- /content -->
-            <footer data-role="footer" data-position="fixed" data-theme="b">
-                <h1>&copy; 2012 Laquaria.com</h1>
-            </footer><!-- /footer -->
-        </page><!-- /page -->
-        
-        
-        
-    </body>
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        var alertMessage = 'Connection type: ' + states[networkState];
+
+       function alertDismissed() {
+       //do something
+       };
+                               
+        navigator.notification.alert(
+            alertMessage,           // message
+            alertDismissed,         // callback
+            'Connection Status',    // title
+            'Awesomesauce!!!'       // buttonName
+        );
+
+    }
+
+});
+
+
+</script>
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</body>
 </html>

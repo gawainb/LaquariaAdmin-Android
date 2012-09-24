@@ -1,103 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Laquaria Admin - iOS</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta charset="utf-8" />
+    <title>FSO AVF - 1209 Final</title>
 
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
+    <meta name="description" content="FSO AVF - 1209 Final" />
+    <meta name="keywords" content="FSO AVF - 1209 Final" />
 
-    <!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
-    <script src="js/libs/modernizr.custom.min.js"></script>
+    <meta name="author" content="Michael Youngblood" />
 
+    <meta name="robots" content="index, follow all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />
 </head>
 <body>
-<page data-role="page" id="home" data-theme="b" data-content-theme="b">
-	<header data-position="fixed" data-role="header" data-theme="b">
-		<h1>Laquaria.com</h1>
-		<nav data-role="navbar">
-			<ul>
-				 <li><a href="edit.html" data-theme="c">Add a Fish</a></li>
-				 <li><a href="#browseFishies" data-theme="c">Browse Fishies</a></li>
-			</ul>
-		</nav>
-	</header><!-- /header -->
-	<article data-role="content" data-theme="b">
-		<p><img src="images/laquaria-logo.png" width="100%" /></p>
-        <div data-role="collapsible" data-theme='e'>
-            <h3>AVF Week2 Assignment</h3>
-            <p>Here are my Week2 Assignment links to working PhoneGap features. </p>
+    <header>
+        <h1>FSO AVF - 1209 Final</h1>
+    </header>
+
+    <article>
+        <section class="main">
+            <h3>Android/iOS/HTML5 Native Features</h3>
+            <ul>
+                <li>
+                    <a href="phoneGap-Camera.html">
+                        <img src="images/digital-camera.png" /> 
+                        <p>Use of Camera</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="phoneGap-Connection.html">
+                        <img src="images/cloud.png" /> 
+                        <p>Use of Connection</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="phoneGap-Storage.html">
+                        <img src="images/database.png" /> 
+                        <p>Use of Storage</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="reflection-week2.html">
+                        <img src="images/film.png" /> 
+                        <p>Week2 Reflection Video</p>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+
+        <section class="rcol">
+
+            <section>
+                <h3>JSON-P Data API Examples</h3>
+                <ul>
+                    <li>
+                        <a href="twitter-search.html">
+                            <img src="images/icon_34.png" /> 
+                            <p>Current Aquarium Chatta</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="colour-lovers.html">
+                            <img src="images/icon_38.png" /> 
+                            <p>Colour Lovers Top Pallets</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Research</h3>
+                <ul>
+                    <li>
+                        <a href="research.week1.html" title="Week1 - Project Intent">
+                            Week1 <br/> Project Intent
+                        </a>
+                    </li>
+                    <li>
+                        <a href="research.week2.html" title="Week2 - Accessibility">
+                            Week2 <br/> Accessibility
+                        </a>
+                    </li>
+                    <li>
+                        <a href="research.week3.html" title="Week3 - Market Research">
+                            Week3 <br/> Market Research
+                        </a>
+                    </li>
+                </ul>
+            </section>
             
-                
-            <a href="phoneGap-Camera.html" data-role="button">Use of Camera</a>
-            <a href="phoneGap-Connection.html" data-role="button">Use of Connection</a>
-            <a href="phoneGap-Storage.html" data-role="button">Use of Storage</a>
-            <a href="reflection-week2.html" data-role="button">Week2 Reflection Video</a>
-            
-        </div>
-        <br />
-		<ul data-role="listview" data-theme="e">
-			<li><a href="edit.html">Add a Fish</a></li>
-			<li><a href="#browseFishies">Browse Fishies</a></li>
-			<li><a href="#twitter-search-api">Current Aquarium Chatta</a></li>
-			<li><a href="#colourlovers">Colour Lovers Top Pallets</a></li>
-        </ul>
-	</article><!-- /content -->
-	<footer data-role="footer" data-position="fixed" data-theme="b">
-		<h4>&copy; 2012 Laquaria.com</h4>
-	</footer><!-- /footer -->
-</page><!-- /page -->
-
-
-<page id="browseFishies" data-role="page" data-add-back-btn="true" data-theme="b">
-	<header data-position="fixed" data-role="header" data-theme="b">
-        <a href="edit.html" data-icon="add" class="ui-btn-right">Add</a>
-		<h1>Laquaria.com</h1>
-	</header><!-- /header -->
-	<article data-role="content">
-        <ul data-role="listview" id="browseFishiesLV" data-theme="c"></ul>
-	</article><!-- /content -->
-	<footer data-role="footer" data-position="fixed" data-theme="b">
-		<h1>&copy; 2012 Laquaria.com</h1>
-	</footer><!-- /footer -->
-</page><!-- /page -->
-    
+        </section>
+    </article>
     
 
-<page id="twitter-search-api" data-role="page" data-add-back-btn="true" data-theme="b">
-    <header data-position="fixed" data-role="header" data-theme="b">
-        <h1>Laquaria.com</h1>
-    </header><!-- /header -->
-    <article data-role="content">
-        <ul data-role="listview" id="twitterSearchLV" data-theme="c"></ul>
-    </article><!-- /content -->
-    <footer data-role="footer" data-position="fixed" data-theme="b">
-        <h1>&copy; 2012 Laquaria.com</h1>
-    </footer><!-- /footer -->
-</page><!-- /page -->
-
-
-
-<page id="colourlovers" data-role="page" data-add-back-btn="true" data-theme="b">
-    <header data-position="fixed" data-role="header" data-theme="b">
-        <h1>Laquaria.com</h1>
-    </header><!-- /header -->
-    <article data-role="content">
-        <ul data-role="listview" id="colourloversLV" data-theme="c"></ul>
-    </article><!-- /content -->
-    <footer data-role="footer" data-position="fixed" data-theme="b">
-        <h1>&copy; 2012 Laquaria.com</h1>
-    </footer><!-- /footer -->
-</page><!-- /page -->
-
-
-<script type="text/javascript" src="js/libs/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="js/libs/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript">
+    !window.jQuery && document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><\/script>');
+    !window.jQuery && document.write('<script type="text/javascript" src="js/libs/jquery-1.8.2.min.js"><\/script>');
+</script>
 <script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/libs/jquery.couch.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </body>
 </html>

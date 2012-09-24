@@ -1,30 +1,163 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Capture Photo</title>
-    </head>
-    <body>
-        
-        <page id="phoneGap-Camera" data-role="page" data-add-back-btn="true" data-theme="b">
-            <header data-position="fixed" data-role="header" data-theme="b">
-                <h1>Laquaria.com</h1>
-            </header><!-- /header -->
-            <article data-role="content">
-                <a href="#" data-role="button" id="pgCamCapturePhoto">Capture Photo</a>
-                <a href="#" data-role="button" id="pgCamCapturePhotoEdit">Capture Photo w/ Edit</a>
+<head>
+    <meta charset="utf-8" />
+    <title>FSO AVF - 1209 Final</title>
 
-                <a href="#" data-role="button" id="pgCamGetPhotoLib">From Photo Library</a>
-                <a href="#" data-role="button" id="pgCamGetPhotoAlbum">From Photo Album</a>
+    <meta name="description" content="FSO AVF - 1209 Final" />
+    <meta name="keywords" content="FSO AVF - 1209 Final" />
 
-                <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-                <img style="display:none;" id="largeImage" src="" />
-            </article><!-- /content -->
-            <footer data-role="footer" data-position="fixed" data-theme="b">
-                <h1>&copy; 2012 Laquaria.com</h1>
-            </footer><!-- /footer -->
-        </page><!-- /page -->
-        
+    <meta name="author" content="Michael Youngblood" />
 
-    
-    </body>
+    <meta name="robots" content="index, follow all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />
+</head>
+<body>
+    <header>
+        <h1>FSO AVF - 1209 Final</h1>
+    </header>
+
+    <article>
+        <section>
+            <h3>PhoneGap Camera</h3>
+            <button data-role="button" id="pgCamCapturePhoto">Capture Photo</button>
+
+            <button data-role="button" id="pgCamCapturePhotoEdit">Capture Photo w/ Edit</button>
+
+            <button data-role="button" id="pgCamGetPhotoLib">From Photo Library</button>
+
+            <button data-role="button" id="pgCamGetPhotoAlbum">From Photo Album</button>
+
+            <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+            <img style="display:none;" id="largeImage" src="" />
+        </section>
+    </article>
+
+<script type="text/javascript">
+    !window.jQuery && document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><\/script>');
+    !window.jQuery && document.write('<script type="text/javascript" src="js/libs/jquery-1.8.2.min.js"><\/script>');
+</script>
+<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+$('document').ready(function() {
+
+//PhoneGap Camera Functions
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+
+    // Wait for Cordova to connect with the device
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // Cordova is ready to be used!
+    //
+    function onDeviceReady() {
+       pictureSource=navigator.camera.PictureSourceType;
+       destinationType=navigator.camera.DestinationType;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+       // Uncomment to view the base64 encoded image data
+       console.log(imageData);
+       
+       // Get image handle
+       //
+       var smallImage = document.getElementById('smallImage');
+       
+       // Unhide image elements
+       //
+       smallImage.style.display = 'block';
+       
+       // Show the captured photo
+       // The inline CSS rules are used to resize the image
+       //
+       smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+       // Uncomment to view the image file URI
+       console.log(imageURI);
+       
+       // Get image handle
+       //
+       var largeImage = document.getElementById('largeImage');
+       
+       // Unhide image elements
+       //
+       largeImage.style.display = 'block';
+       
+       // Show the captured photo
+       // The inline CSS rules are used to resize the image
+       //
+       largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    $('#pgCamCapturePhoto').bind('click',function(){
+       // Take picture using device camera and retrieve image as base64-encoded string
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+                                   destinationType: destinationType.DATA_URL });
+    });
+
+    // A button will call this function
+    //
+    $('#pgCamCapturePhotoEdit').bind('click',function(){
+       // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+                                   destinationType: destinationType.DATA_URL });
+    });
+
+    // A button will call this function
+    //
+    $('#pgCamGetPhotoLib').bind('click',function(){
+       var source = pictureSource.PHOTOLIBRARY;
+       // Retrieve image file location from specified source
+       navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+                                   destinationType: destinationType.FILE_URI,
+                                   sourceType: source });
+    });
+
+                           
+    // A button will call this function
+    //
+    $('#pgCamGetPhotoAlbum').bind('click',function(){
+        var source = pictureSource.SAVEDPHOTOALBUM;
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+                                   destinationType: destinationType.FILE_URI,
+                                   sourceType: source });
+    });
+
+                           
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+       alert('Failed because: ' + message);
+    }
+    alert('camera page good!')
+});
+
+
+
+
+
+
+
+</script>
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</body>
 </html>

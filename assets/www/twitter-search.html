@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>FSO AVF - 1209 Final</title>
+
+    <meta name="description" content="FSO AVF - 1209 Final" />
+    <meta name="keywords" content="FSO AVF - 1209 Final" />
+
+    <meta name="author" content="Michael Youngblood" />
+
+    <meta name="robots" content="index, follow all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />
+</head>
+<body id='twitter-search-api'>
+    <header>
+        <h1>FSO AVF - 1209 Final</h1>
+    </header>
+
+    <article>
+        <section>
+            <h3>Twitter Search API</h3>
+            <ul id="twitterSearchLV"></ul>
+        </section>
+    </article>
+
+<script type="text/javascript">
+    !window.jQuery && document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><\/script>');
+    !window.jQuery && document.write('<script type="text/javascript" src="js/libs/jquery-1.8.2.min.js"><\/script>');
+</script>
+<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+$('document').ready(function() {
+    console.log('Twitter Page OK!!');
+    $.ajax({
+         url: 'http://search.twitter.com/search.json?q=aquarium',
+         type: 'GET',
+         dataType: 'jsonp',
+         success: function(data, textStatus, xhr) {
+         $('#twitterSearchLV').empty();
+         console.log(data);
+         console.log(xhr);
+         console.log(textStatus);
+         // append tweets into page
+         $(data.results).each(function(i,v){
+              $('<li>' + 
+                '<img src="' + this.profile_image_url + '" />' + 
+                '<h4>' + this.from_user + '</h4>' + 
+                '<p style="white-space: normal;">' + this.text + '</p>' + 
+                '</li>').appendTo($('#twitterSearchLV'));
+              });
+         }
+         });
+    });
+</script>
+
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</body>
+</html>

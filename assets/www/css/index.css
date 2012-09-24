@@ -1,0 +1,298 @@
+/* CSS RESET */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+a img {border: 0;}
+
+/*    Typography presets
+    ------------------    */
+
+.gigantic {
+    font-size: 110px;
+    line-height: 120px;
+    letter-spacing: -2px;
+}
+
+.huge, h1 {
+    font-size:2em;
+    font-weight:300;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    text-transform:uppercase;
+}
+
+.large, h2 {
+    font-size: 1.8em;
+}
+
+.bigger, h3 {
+    font-size: 1.6em;
+    text-transform:uppercase;
+}
+
+.big, h4 {
+    font-size: 1.4em;
+}
+
+html {
+    background-color:#A7A7A7;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-repeat: repeat-x;
+}
+
+html,
+body {
+    font-size:12px;
+    min-height: 100%;
+}
+
+body {
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    width: 95%;
+    margin: 0 auto;
+}
+
+
+.small, small {
+    font-size: 13px;
+    line-height: 18px;
+}
+
+/* Selection colours (easy to forget) */
+
+::selection          {background: rgb(255,255,158);}
+::-moz-selection     {background: rgb(255,255,158);}
+img::selection         {background: transparent;}
+img::-moz-selection    {background: transparent;}
+body {-webkit-tap-highlight-color: rgb(255,255,158);}
+
+
+
+/*        Default Layout: 992px. 
+        Gutters: 24px.
+        Outer margins: 48px.
+        Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+    width: 896px;
+    padding: 72px 48px 84px;
+    color: rgb(60,60,60);
+    -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+header {
+    height: 3em;
+    clear: all;
+}
+article {
+    clear: all;
+    height: auto;
+    /* ie6: height:auto !important; height:100%; */
+    margin-bottom: -6em;
+    position: relative;
+}
+
+article section {
+    float: left;
+}
+
+h3 {
+    width: 100%;
+    border-bottom: 2px solid #000;
+    padding-top: 2em;
+    margin-bottom: 1.5em;
+}
+
+article p {
+    padding-bottom: 1em;
+}
+
+article section ul {
+    width: 100%;
+}
+
+article section ul li {
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+
+article section ul li a {
+    text-decoration: none;
+}
+
+article section.main {
+    width: 75%;
+}
+
+article section.rcol {
+    float: right;
+    width: 20%;
+}
+
+ul#twitterSearchLV {
+    width: 100%;
+}
+ul#twitterSearchLV li {
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+}
+ul#twitterSearchLV li img{
+    float: left;
+    padding-right: 1em;
+}
+
+ul#colourloversLV li {
+    height: 180px;
+    width: 250px;
+}
+button {
+    margin: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+ol {
+    padding-bottom: 10px;
+}
+
+ol li {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+/*        Tablet Layout: 768px.
+        Gutters: 24px.
+        Outer margins: 28px.
+        Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    
+    body {
+        width: 712px;
+        padding: 48px 28px 60px;
+    }
+}
+
+
+
+/*        Mobile Layout: 320px.
+        Gutters: 24px.
+        Outer margins: 34px.
+        Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+    
+    body {
+        width: 252px;
+        padding: 48px 34px 60px;
+    }
+    section ul {
+        width: 100%;
+    }
+
+    section ul li {
+        width: 100%;
+    }
+
+
+    article section.main {
+        width: 100%;
+    }
+    article section.rcol {
+        width: 100%;
+        float: left;
+    }
+}
+
+
+
+/*        Wide Mobile Layout: 480px.
+        Gutters: 24px.
+        Outer margins: 22px.
+        Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    
+    body {
+        width: 436px;
+        padding: 36px 22px 48px;
+    }
+    section ul {
+        width: 100%;
+    }
+
+    section ul li {
+        width: auto;
+    }
+
+
+    article section.main {
+        width: 100%;
+    }
+    article section.rcol {
+        width: 100%;
+        float: left;
+    }
+
+}
+
+
+/*    Retina media query.
+    Overrides styles for devices with a 
+    device-pixel-ratio of 2+, such as iPhone 4.
+-----------------------------------------------    */
+
+@media 
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
+    
+        body {}
+      
+        section ul {
+            width: 100%;
+        }
+
+        section ul li {
+            width: 100%;
+        }
+
+        article section.main {
+            width: 100%;
+        }
+        article section.rcol {
+            width: 100%;
+            float: left;
+        }
+
+    }
+    
+}
+
+
+
+
+
+
